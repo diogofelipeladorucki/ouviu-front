@@ -6,9 +6,19 @@ export default defineNuxtConfig({
   // No Nuxt 4, os arquivos ficam na pasta 'app'
   srcDir: 'app',
 
+  runtimeConfig: {
+    public: {
+      googleClientId: process.env.NUXT_PUBLIC_GOOGLE_CLIENT_ID,
+      apiUrl: process.env.NUXT_PUBLIC_API_URL || 'http://localhost:3001'
+    }
+  },
+
   css: ['~/assets/css/main.css'],
 
-  modules: [],
+  modules: [
+    '@pinia/nuxt',
+    '@pinia-plugin-persistedstate/nuxt'
+  ],
 
   app: {
     head: {

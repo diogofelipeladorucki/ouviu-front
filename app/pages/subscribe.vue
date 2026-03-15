@@ -19,7 +19,7 @@
             <li class="flex gap-x-3">Sem cartão de crédito</li>
           </ul>
         </div>
-        <a href="#" class="mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold ring-1 ring-inset ring-primary-200 text-primary-600 hover:ring-primary-300">Começar Trial</a>
+        <NuxtLink to="/login" class="mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold ring-1 ring-inset ring-primary-200 text-primary-600 hover:ring-primary-300">Começar Trial</NuxtLink>
       </div>
 
       <!-- Monthly Plan -->
@@ -36,7 +36,7 @@
             <li class="flex gap-x-3">Áudio e Texto</li>
           </ul>
         </div>
-        <a href="#" class="mt-8 block rounded-md bg-primary-600 px-3 py-2 text-center text-sm font-semibold text-white">Assinar Agora</a>
+        <NuxtLink to="/login" class="mt-8 block rounded-md bg-primary-600 px-3 py-2 text-center text-sm font-semibold text-white">Assinar Agora</NuxtLink>
       </div>
 
       <!-- Annual Plan -->
@@ -54,7 +54,7 @@
             <li class="flex gap-x-3">Economize 35%</li>
           </ul>
         </div>
-        <a href="#" class="mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold ring-1 ring-inset ring-primary-200 text-primary-600 hover:ring-primary-300">Assinar Plano Anual</a>
+        <NuxtLink to="/login" class="mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold ring-1 ring-inset ring-primary-200 text-primary-600 hover:ring-primary-300">Assinar Plano Anual</NuxtLink>
       </div>
     </div>
   </div>

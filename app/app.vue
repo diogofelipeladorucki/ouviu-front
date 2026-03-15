@@ -27,6 +27,11 @@ useHead({
   ],
   script: [
     {
+      src: 'https://accounts.google.com/gsi/client',
+      async: true,
+      defer: true
+    },
+    {
       src: 'https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js',
       defer: true
     }
