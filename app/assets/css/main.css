@@ -1,0 +1,20 @@
+/* Global styles */
+html,
+body,
+#__nuxt {
+  min-height: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f9fafb; /* gray-50 */
+}
+
+/* Custom Primary Colors (Blue shades for default Flowbite compatibility) */
+.bg-primary-600 { background-color: #1c64f2; }
+.text-primary-600 { color: #1c64f2; }
+.hover\:bg-primary-700:hover { background-color: #1a56db; }
+.focus\:ring-primary-300:focus { --tw-ring-color: #a4cafe; }
