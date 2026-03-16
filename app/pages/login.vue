@@ -40,6 +40,10 @@ const userStore = useUserStore()
 const config = useRuntimeConfig()
 
 onMounted(() => {
+  if (userStore.user) {
+    return navigateTo('/library')
+  }
+
   if (process.client) {
     const checkGoogle = setInterval(() => {
       if (window.google) {
@@ -72,7 +76,7 @@ async function handleCredentialResponse(response) {
   const result = await userStore.loginWithGoogle(response.credential)
   
   if (result.success) {
-    return navigateTo('/', { replace: true })
+    return navigateTo('/library', { replace: true })
   } else {
     alert('Erro ao fazer login com Google. Tente novamente.')
   }

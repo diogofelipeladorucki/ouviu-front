@@ -10,8 +10,11 @@
           Resumos inteligentes em áudio e texto para quem não tem tempo a perder. Foco total na leitura e aprendizado contínuo.
         </p>
         <div class="mt-10 flex items-center justify-center gap-x-6">
-          <NuxtLink to="/subscribe" class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
+          <NuxtLink v-if="!userStore.user" to="/subscribe" class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600">
             Começar Agora - 7 Dias Grátis
+          </NuxtLink>
+          <NuxtLink v-else to="/library" class="rounded-md bg-blue-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-blue-500">
+            Acessar Minha Biblioteca
           </NuxtLink>
         </div>
       </div>
@@ -40,3 +43,7 @@
     </div>
   </div>
 </template>
+
+<script setup>
+const userStore = useUserStore()
+</script>

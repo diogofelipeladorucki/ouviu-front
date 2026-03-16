@@ -3,18 +3,19 @@ import axios from 'axios'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
-    user: null,
-    token: null,
+    user: null as any,
+    token: null as string | null,
   }),
   actions: {
-    async loginWithGoogle(credential) {
+    async loginWithGoogle(credential: string) {
+      const config = useRuntimeConfig()
       try {
-        const response = await axios.post('http://localhost:3001/api/auth/google', {
+        const response = await axios.post(`${config.public.apiUrl}/api/auth/google`, {
           token: credential
         })
 
-        this.user = response.data.user
-        this.token = response.data.token
+          this.user = response.data.user
+          this.token = response.data.token
 
         return { success: true }
       } catch (error) {
