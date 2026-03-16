@@ -17,6 +17,7 @@
     "axios": "^1.13.6",
     "flowbite": "^4.0.1",
     "flowbite-vue": "^0.2.3",
+    "marked": "^17.0.4",
     "nuxt": "^4.4.2",
     "pinia": "^3.0.4",
     "postcss": "^8.5.8",

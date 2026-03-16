@@ -89,9 +89,7 @@
           Resumo em Texto
         </h3>
         <div class="prose prose-blue max-w-none">
-          <div class="text-gray-800 font-medium leading-[1.8] text-lg whitespace-pre-wrap">
-            {{ book.fullText }}
-          </div>
+          <div class="text-gray-800 font-medium markdown-content" v-html="renderedMarkdown"></div>
         </div>
       </div>
     </main>
@@ -108,6 +106,8 @@
 
 <script setup>
 import axios from 'axios'
+import { marked } from 'marked'
+
 const route = useRoute()
 const config = useRuntimeConfig()
 
@@ -118,6 +118,11 @@ const currentTime = ref(0)
 const duration = ref(0)
 const audioRef = ref(null)
 const isDragging = ref(false)
+
+const renderedMarkdown = computed(() => {
+  if (!book.value?.fullText) return ''
+  return marked(book.value.fullText)
+})
 
 onMounted(async () => {
   try {
@@ -190,6 +195,36 @@ if (process.client) {
 /* Typography improvements */
 .prose div {
   font-family: 'Inter', sans-serif;
+}
+
+.markdown-content :deep(p) {
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+  font-size: 1.125rem;
+}
+
+.markdown-content :deep(h1), 
+.markdown-content :deep(h2), 
+.markdown-content :deep(h3) {
+  color: #111827;
+  font-weight: 900;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+}
+
+.markdown-content :deep(h2) { font-size: 1.5rem; }
+.markdown-content :deep(h3) { font-size: 1.25rem; }
+
+.markdown-content :deep(ul), 
+.markdown-content :deep(ol) {
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.markdown-content :deep(li) {
+  margin-bottom: 0.5rem;
 }
 
 input[type="range"]::-webkit-slider-thumb {
