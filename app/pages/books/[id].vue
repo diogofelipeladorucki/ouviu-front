@@ -29,7 +29,7 @@
           <p class="text-lg text-gray-500 font-medium italic mb-6 leading-relaxed">"{{ book.description }}"</p>
           
           <!-- Audio Player Block -->
-          <div class="bg-blue-600 rounded-[2rem] p-8 text-white shadow-xl shadow-blue-200">
+          <div class="audio-session bg-blue-600 rounded-[2rem] text-white shadow-xl shadow-blue-200">
             <!-- Time Markers -->
             <div class="flex justify-between text-[11px] font-black text-blue-200 uppercase tracking-widest mb-4 px-2">
               <span class="bg-blue-700/50 px-2 py-0.5 rounded-md">{{ formatTime(currentTime) }}</span>
@@ -38,8 +38,8 @@
 
             <!-- Seek Bar -->
             <div class="relative group h-6 flex items-center mb-8 cursor-pointer" @mousedown="startDragging" @touchstart.passive="startDragging">
-              <div class="h-1.5 w-full bg-blue-500/50 rounded-full overflow-hidden">
-                <div class="h-full bg-white transition-all duration-75" :style="{ width: progress + '%' }"></div>
+              <div class="h-1.5 w-full progress-track rounded-full overflow-hidden">
+                <div class="h-full progress-fill transition-all duration-75" :style="{ width: progress + '%' }"></div>
               </div>
               <!-- Handle -->
               <div class="absolute w-4 h-4 bg-white rounded-full shadow-lg border-2 border-blue-600 transition-transform group-hover:scale-125" :style="{ left: `calc(${progress}% - 8px)` }"></div>
@@ -65,7 +65,7 @@
               </button>
 
               <button @click="togglePlay" class="w-20 h-20 bg-white rounded-full flex items-center justify-center text-blue-600 hover:scale-105 transition-all active:scale-95 shadow-2xl">
-                <svg v-if="!playing" class="w-10 h-10 ml-1.5" fill="currentColor" viewBox="0 0 20 20"><path d="M4.018 14L14.41 10 4.018 6z"></path></svg>
+                <svg v-if="!playing" class="w-10 h-10 ml-1.5" fill="currentColor" viewBox="0 0 24 24"><path d="M7 6v12l10-6z"></path></svg>
                 <svg v-else class="w-10 h-10" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4h4v12H4zM12 4h4v12h-4z"></path></svg>
               </button>
 
@@ -74,6 +74,13 @@
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.934 12.8a1 1 0 000-1.6l-5.334-4A1 1 0 005 8v8a1 1 0 001.6.8l5.334-4zM19.934 12.8a1 1 0 000-1.6l-5.334-4A1 1 0 0013 8v8a1 1 0 001.6.8l5.334-4z"></path>
                 </svg>
                 <p class="text-[9px] font-black mt-1">10S</p>
+              </button>
+
+              <!-- Speed Control -->
+              <button @click="toggleSpeed" class="bg-blue-700/50 hover:bg-blue-700 transition-colors w-12 h-12 rounded-xl flex items-center justify-center border border-white/10 group">
+                <span class="text-[10px] font-black group-hover:scale-110 transition-transform">
+                  {{ playbackRate }}x
+                </span>
               </button>
             </div>
 
@@ -116,8 +123,20 @@ const playing = ref(false)
 const progress = ref(0)
 const currentTime = ref(0)
 const duration = ref(0)
+const playbackRate = ref(1.0)
 const audioRef = ref(null)
 const isDragging = ref(false)
+
+const speeds = [0.75, 1.0, 1.25, 1.5, 2.0]
+
+function toggleSpeed() {
+  const currentIndex = speeds.indexOf(playbackRate.value)
+  const nextIndex = (currentIndex + 1) % speeds.length
+  playbackRate.value = speeds[nextIndex]
+  if (audioRef.value) {
+    audioRef.value.playbackRate = playbackRate.value
+  }
+}
 
 const renderedMarkdown = computed(() => {
   if (!book.value?.fullText) return ''
@@ -231,5 +250,27 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   height: 24px;
   width: 100%;
+}
+
+.progress-track {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.progress-fill {
+  background-color: #ffffff;
+}
+
+.audio-session {
+  padding: 2rem;
+  margin: 1.5rem auto 3rem auto; /* Centralizado horizontalmente com margens verticais */
+  width: calc(100% - 2rem); /* Garantir margem lateral mesmo em telas muito pequenas */
+}
+
+@media (min-width: 768px) {
+  .audio-session {
+    padding: 3rem;
+    margin: 0 0 3rem 0; /* No desktop respeita o alinhamento da grid original */
+    width: 100%;
+  }
 }
 </style>
