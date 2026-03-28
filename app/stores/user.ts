@@ -27,6 +27,21 @@ export const useUserStore = defineStore('user', {
       this.user = null
       this.token = null
       navigateTo('/')
+    },
+    async fetchUser() {
+      if (!this.token) return
+      const config = useRuntimeConfig()
+      try {
+        const response = await axios.get(`${config.public.apiUrl}/api/auth/me`, {
+          headers: { Authorization: `Bearer ${this.token}` }
+        })
+        this.user = response.data.user
+      } catch (error: any) {
+        console.error('Fetch user error:', error)
+        if (error.response?.status === 401) {
+          this.logout()
+        }
+      }
     }
   },
   persist: true

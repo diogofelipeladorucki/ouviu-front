@@ -55,6 +55,11 @@ useHead({
     }
   ]
 })
+onMounted(() => {
+  if (userStore.token) {
+    userStore.fetchUser()
+  }
+})
 </script>
 
 <style>
