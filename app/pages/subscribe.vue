@@ -1,5 +1,7 @@
 <template>
-  <div class="py-24 px-6 lg:px-8 bg-white">
+  <div class="min-h-screen bg-white">
+    <TheNavbar />
+    <div class="py-24 px-6 lg:px-8">
     <div class="mx-auto max-w-4xl text-center">
       <h2 class="text-base/7 font-semibold text-primary-600">Planos e Preços</h2>
       <p class="mt-2 text-4xl font-semibold tracking-tight text-gray-900 sm:text-5xl">Escolha o plano ideal para você</p>
@@ -55,6 +57,7 @@
           </ul>
         </div>
         <NuxtLink :to="userStore.user ? '/library' : '/login'" class="mt-8 block rounded-md px-3 py-2 text-center text-sm font-semibold ring-1 ring-inset ring-primary-200 text-primary-600 hover:ring-primary-300">Assinar Plano Anual</NuxtLink>
+      </div>
       </div>
     </div>
   </div>

@@ -1,19 +1,7 @@
 <template>
   <div class="min-h-screen bg-gray-50 flex flex-col">
     <!-- Header -->
-    <nav class="bg-white border-b border-gray-200 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
-      <NuxtLink to="/library" class="flex items-center gap-2 text-gray-500 hover:text-blue-600 transition-all font-bold group">
-        <svg class="w-5 h-5 transition-transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-        Biblioteca
-      </NuxtLink>
-      
-      <div v-if="book" class="text-center">
-        <h1 class="text-sm font-black text-gray-900 uppercase tracking-widest line-clamp-1 gap-2">{{ book.title }}</h1>
-        <p class="text-[10px] text-gray-400 font-bold uppercase">{{ book.author }}</p>
-      </div>
-
-      <div class="w-20"></div> <!-- Spacer for balance -->
-    </nav>
+    <TheNavbar mode="book" />
 
     <main v-if="book" class="flex-1 max-w-4xl mx-auto w-full p-6 md:p-12">
       <!-- Cover and Info -->
